@@ -16,9 +16,9 @@ The plugin also supports additional fields in the user profile.
 
 ## Installation ##
 **NB:** This plugin requires PHP version 3.4 or higher!  
-Upload the members-list folder to the /wp-content/plugins/ directory.  
-Activate the plugin through the 'Plugins' menu in WordPress.  
-Add the shortcode to the page or post you'd like to display the members list.  
-You're all set!.  
+ 1. Upload the members-list folder to the /wp-content/plugins/ directory.  
+ 2. Activate the plugin through the 'Plugins' menu in WordPress.  
+ 3. Add the shortcode to the page or post you'd like to display the members list.  
+ 4. You're all set!.  
 
 
