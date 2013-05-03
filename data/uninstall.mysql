@@ -1,0 +1,14 @@
+-- /*******************************************************
+-- *
+-- * Remove data tables
+-- *
+-- *******************************************************/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+DROP TABLE IF EXISTS `mrnt_asscn_state_province`;
+DROP TABLE IF EXISTS `mrnt_asscn_country`;
+DROP TABLE IF EXISTS `mrnt_asscn_worldregion`;
+DROP TABLE IF EXISTS `mrnt_asscn_address_format`;
+
+SET FOREIGN_KEY_CHECKS=1;

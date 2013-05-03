@@ -1,0 +1,96 @@
+-- /*******************************************************
+-- *
+-- * Clean up the exisiting tables
+-- *
+-- *******************************************************/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+DROP TABLE IF EXISTS `mrnt_asscn_state_province`;
+DROP TABLE IF EXISTS `mrnt_asscn_country`;
+DROP TABLE IF EXISTS `mrnt_asscn_worldregion`;
+DROP TABLE IF EXISTS `mrnt_asscn_address_format`;
+
+SET FOREIGN_KEY_CHECKS=1;
+
+-- /*******************************************************
+-- *
+-- * Create new tables
+-- *
+-- *******************************************************/
+
+-- /*******************************************************
+-- *
+-- * mrnt_asscn_address_format
+-- *
+-- *******************************************************/
+
+CREATE TABLE `mrnt_asscn_address_format` (
+
+	 `id` int unsigned NOT NULL AUTO_INCREMENT  COMMENT 'Address Format Id',
+	 `format` text    COMMENT 'The format of an address',
+	PRIMARY KEY ( `id` )
+
+)  DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+-- /*******************************************************
+-- *
+-- * mrnt_asscn_worldregion
+-- *
+-- *******************************************************/
+
+CREATE TABLE `mrnt_asscn_worldregion` (
+
+	 `id` int unsigned NOT NULL AUTO_INCREMENT  COMMENT 'Country Id',
+	 `name` varchar(128)    COMMENT 'Region name to be associated with countries',
+    PRIMARY KEY ( `id` )
+
+)  DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+-- /*******************************************************
+-- *
+-- * mrnt_asscn_country
+-- *
+-- *******************************************************/
+CREATE TABLE `mrnt_asscn_country` (
+
+	 `id` int unsigned NOT NULL AUTO_INCREMENT  COMMENT 'Country Id',
+	 `name` varchar(64)    COMMENT 'Country Name',
+	 `iso_code` char(2)    COMMENT 'ISO Code',
+	 `country_code` varchar(4)    COMMENT 'National prefix to be used when dialing TO this country.',
+	 `address_format_id` int unsigned    COMMENT 'Foreign key to mrnt_asscn_address_format.id.',
+	 `idd_prefix` varchar(4)    COMMENT 'International direct dialing prefix from within the country TO another country',
+	 `ndd_prefix` varchar(4)    COMMENT 'Access prefix to call within a country to a different area',
+	 `region_id` int unsigned NOT NULL   COMMENT 'Foreign key to mrnt_asscn_worldregion.id.',
+	 `is_province_abbreviated` tinyint   DEFAULT 0 COMMENT 'Should state/province be displayed as abbreviation for contacts from this country?',
+	PRIMARY KEY ( `id` ),
+	UNIQUE INDEX `UI_name_iso_code`(
+		`name`,
+		`iso_code`
+	),
+	CONSTRAINT FK_mrnt_asscn_country_address_format_id FOREIGN KEY (`address_format_id`) REFERENCES `mrnt_asscn_address_format`(`id`),
+	CONSTRAINT FK_mrnt_asscn_country_region_id FOREIGN KEY (`region_id`) REFERENCES `mrnt_asscn_worldregion`(`id`)
+
+)  DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+-- /*******************************************************
+-- *
+-- * mrnt_asscn_state_province
+-- *
+-- *******************************************************/
+
+CREATE TABLE `mrnt_asscn_state_province` (
+
+	 `id` int unsigned NOT NULL AUTO_INCREMENT  COMMENT 'State / Province ID',
+	 `name` varchar(64)    COMMENT 'Name of State / Province',
+	 `abbreviation` varchar(4)    COMMENT '2-4 Character Abbreviation of State / Province',
+	 `country_id` int unsigned NOT NULL   COMMENT 'ID of Country that State / Province belong',
+    PRIMARY KEY ( `id` ),
+    UNIQUE INDEX `UI_name_country_id`(
+        `name`,
+        `country_id`
+	),
+	CONSTRAINT FK_mrnt_asscn_state_province_country_id FOREIGN KEY (`country_id`) REFERENCES `mrnt_asscn_country`(`id`)
+	
+)  DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+

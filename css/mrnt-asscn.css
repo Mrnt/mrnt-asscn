@@ -1,0 +1,30 @@
+/*!
+@author:	Maurent Software ${date.year}
+*/
+@CHARSET "UTF-8";
+
+td.mrnt_asscn_name {
+	width: 30%;
+}
+
+td.mrnt_asscn_address {
+}
+
+td.mrnt_asscn_contact {
+	width: 25%;
+}
+
+.mrnt_asscn_member label {
+	display: block;
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 4em;
+	height: 1em;	
+}
+
+.mrnt_asscn_contact span {
+	display: block;
+	margin-left: 4em;
+}
+
