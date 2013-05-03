@@ -15,13 +15,10 @@ Note that the roles are separate from any role the member may have in terms of a
 The plugin also supports additional fields in the user profile.
 
 ## Installation ##
-**NB:** This plugin requires PHP version 3.4 or higher! 
+**NB:** This plugin requires PHP version 3.4 or higher!  
+Upload the members-list folder to the /wp-content/plugins/ directory.  
+Activate the plugin through the 'Plugins' menu in WordPress.  
+Add the shortcode to the page or post you'd like to display the members list.  
+You're all set!.  
 
-Upload the members-list folder to the /wp-content/plugins/ directory.
-
-Activate the plugin through the 'Plugins' menu in WordPress.
-
-Add the shortcode to the page or post you'd like to display the members list.
-
-You're all set!.
 
